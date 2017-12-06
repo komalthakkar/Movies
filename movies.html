@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<title>
+    Movie Selector
+</title>
+<script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+</head>
+<body>
+<form>
+    <p id="demo"></p>
+    <input type="radio" name="movie" value="The list of actors are so and so..." id="one">MV1<br>
+    <input type="radio" name="movie" value="The list of actors are so and so..." id="two">MV2<br>
+    <input type="radio" name="movie" value="The list of actors are so and so..." id="three">MV3<br>
+    <input type="radio" name="movie" value="The list of actors are so and so..." id="four">MV4<br>
+    
+</form>
+<!--p id="demo"></p-->
+<script>
+  /*function myFunction() {
+        var x = document.getElementById("one").value;
+        document.getElementById("demo").innerHTML = x;
+    }*/
+    function select(state, action){
+        if(typeof state === 'undefined'){
+            return ''
+        }
+
+        switch (action.type) {
+            case 'Mv1' : 
+            return 'The list of actors are so and so...'
+            case 'Mv2' :
+            return 'The list of actors are b...'
+            case 'Mv3' :
+            return 'The list of actors are c...'
+            case 'Mv4' :
+            return 'The list of actors are so and so...'
+            default:
+            return state
+        }
+    }
+    var store = Redux.createStore(select)
+    var value = document.getElementById('demo')
+
+    function render() {
+        value.innerHTML = store.getState().toString()
+    }
+
+    render()
+        store.subscribe(render)
+
+        document.getElementById('one')
+         .addEventListener('click', function() {
+             store.dispatch({type: 'Mv1'})
+         })
+
+        document.getElementById('two')
+         .addEventListener('click', function(){
+             store.dispatch({type: 'Mv2'})
+         })
+
+        document.getElementById('three')
+         .addEventListener('click', function(){
+             store.dispatch({type: 'Mv3'})
+         })
+
+        document.getElementById('four')
+         .addEventListener('click', function(){
+             store.dispatch({type: 'Mv4'})
+         })
+</script>
+</body>
+</html>
